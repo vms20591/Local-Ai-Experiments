@@ -34,6 +34,7 @@ pip install -r requirements.txt
 export url=http://localhost:1234              # LLM endpoint
 export model=meta-llama-3.1-8b-instruct       # LLM model name
 export mongo=mongodb://localhost:27017        # MongoDB URI
+export OPENAI_API_KEY=dummy                   # OpenAI apikey
 ```
 
 ---

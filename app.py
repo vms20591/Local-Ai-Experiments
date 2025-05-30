@@ -12,6 +12,7 @@ def main():
     llm_url = os.environ.get('url', 'http://localhost:1234').strip().strip('/')
     llm_model = os.environ.get('model', 'meta-llama-3.1-8b-instruct').strip()
     mongo_url = os.environ.get('mongo', 'mongodb://localhost:27017').strip()
+    api_key = os.environ.get('OPENAI_API_KEY', 'dummy').strip()
     session_id = str(uuid.uuid4())
     
     if len(sys.argv) > 1:
@@ -25,7 +26,7 @@ def main():
     print()
 
     # llm
-    llm = ChatOpenAI(base_url=f"{llm_url}/v1", model=llm_model)
+    llm = ChatOpenAI(base_url=f"{llm_url}/v1", model=llm_model, api_key=api_key)
 
     # history
     history = MongoDBChatMessageHistory(
