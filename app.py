@@ -9,7 +9,13 @@ from langchain.prompts import ChatPromptTemplate
 from langchain_mongodb import MongoDBChatMessageHistory
 
 def main():
-    llm_url = os.environ.get('url', 'http://localhost:1234').strip().strip('/')
+    colorama.init()
+    # sanitize LLM endpoint, ensuring we don't append '/v1' twice
+    llm_url = os.environ.get('url', 'http://localhost:1234').strip().rstrip('/')
+    if llm_url.endswith('/v1'):
+        base_url = llm_url
+    else:
+        base_url = f"{llm_url}/v1"
     llm_model = os.environ.get('model', 'meta-llama-3.1-8b-instruct').strip()
     mongo_url = os.environ.get('mongo', 'mongodb://localhost:27017').strip()
     api_key = os.environ.get('OPENAI_API_KEY', 'dummy').strip()
@@ -26,7 +32,7 @@ def main():
     print()
 
     # llm
-    llm = ChatOpenAI(base_url=f"{llm_url}/v1", model=llm_model, api_key=api_key)
+    llm = ChatOpenAI(base_url=base_url, model=llm_model, api_key=api_key)
 
     # history
     history = MongoDBChatMessageHistory(
