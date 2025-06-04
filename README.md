@@ -19,7 +19,7 @@ This is a minimal Python terminal application for experimenting with local LLMs 
 ### 1. Clone and prepare
 ```bash
 git clone <this-repo-url>
-cd local-models
+cd Local-Ai-Experiments
 python3 -m venv venv
 source venv/bin/activate
 ```
