@@ -9,7 +9,8 @@ from langchain.prompts import ChatPromptTemplate
 from langchain_mongodb import MongoDBChatMessageHistory
 
 def main():
-    colorama.init()
+    # initialize color support for terminal output
+    colorama.init(autoreset=True)
     # sanitize LLM endpoint, ensuring we don't append '/v1' twice
     llm_url = os.environ.get('url', 'http://localhost:1234').strip().rstrip('/')
     if llm_url.endswith('/v1'):
